@@ -105,6 +105,11 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: status {
+    type: string
+    sql: ${TABLE}.STATUS;;
+  }
+
   measure: count {
     type: count
   }
