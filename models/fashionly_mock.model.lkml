@@ -71,3 +71,5 @@ explore: events {
 }
 
 explore: distribution_centers {}
+
+explore: orders_and_revenue {}

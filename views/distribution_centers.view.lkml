@@ -15,17 +15,6 @@ view: distribution_centers {
     sql: ${TABLE}.latitude ;;
   }
 
-
-  measure: total_latitude {
-    type: sum
-    sql: ${latitude} ;;
-  }
-
-  measure: average_latitude {
-    type: average
-    sql: ${latitude} ;;
-  }
-
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
