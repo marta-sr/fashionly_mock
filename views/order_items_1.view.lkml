@@ -114,36 +114,19 @@ view: order_items {
     type: count
   }
 
-  ###### recent orders ######
+  ###### las q orders ######
 
-  dimension_group: since_created {
-    type: duration
-    intervals: [
-      day,
-      week,
-      month
-    ]
-    sql_start: ${created_date} ;;
-    sql_end: current_date() ;;
+
+  measure: total_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
   }
-
-  dimension: is_recent_order {
-    type: yesno
-    sql: ${months_since_created} = 0 ;;
-  }
-
-  ###### orders and revenue #######
 
   measure: total_revenue{
     type: sum
     sql: ${sale_price} ;;
     filters: [status: "-Cancelled,-Returned"]
     value_format: "$0.00"
-  }
-
-  measure: total_orders {
-    type: count_distinct
-    sql: ${order_id} ;;
   }
 
 }
