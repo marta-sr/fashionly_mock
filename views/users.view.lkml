@@ -106,4 +106,9 @@ view: users {
     type: count
     drill_fields: [id, last_name, first_name]
   }
+
+  measure: count_last_names {
+    type: count_distinct
+    sql: ${last_name} ;;
+  }
 }

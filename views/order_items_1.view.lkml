@@ -23,6 +23,8 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
+
+
   dimension_group: delivered {
     type: time
     timeframes: [
@@ -115,7 +117,28 @@ view: order_items {
   }
 
   ###### las q orders ######
+  dimension_group: since_created {
+    type: duration
+    intervals: [
+      day,
+      week,
+      month
+    ]
+    sql_start: ${created_date} ;;
+    sql_end: current_date() ;;
+  }
 
+  dimension: is_new_campaign_order {
+    type: yesno
+    sql: ${months_since_created} < 4 ;;
+  }
+
+  measure: total_revenue_new_campaign_orders{
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [status: "-Cancelled,-Returned", is_new_campaign_order: "Yes"]
+    value_format: "$0.00"
+  }
 
   measure: total_orders {
     type: count_distinct

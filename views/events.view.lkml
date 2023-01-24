@@ -90,8 +90,19 @@ view: events {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: sum {
+    type: number
+    sql: ${user_id}*${id} ;;
+  }
+
+  measure: total_sum {
+    type: sum
+    sql: ${sum} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, users.last_name, users.id, users.first_name]
   }
+
 }
